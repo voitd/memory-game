@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import * as Cell from "../components/Cell";
 import * as Board from "../components/Board";
 
-export default () => {
+const Layout = () => {
   return (
     <>
       <GameView />
@@ -20,37 +20,60 @@ const Status = {
   Lost: "Lost",
 };
 
+const initialBoard = [
+  { symbol: "A", status: Cell.Status.Closed },
+  { symbol: "A", status: Cell.Status.Closed },
+  { symbol: "B", status: Cell.Status.Closed },
+  { symbol: "B", status: Cell.Status.Closed },
+  { symbol: "C", status: Cell.Status.Closed },
+  { symbol: "C", status: Cell.Status.Closed },
+];
+
+const startGame = ({ state }) => ({
+  board: initialBoard,
+  status: Status.Running,
+});
+
+const openCell = (i) => (state) => ({
+  ...state,
+  board: Board.setStatusAt(i, Cell.Status.Open, state.board),
+});
+
 const GameView = () => {
-  const [state, setState] = useState({ status: Status.Stoped });
+  const [state, setState] = useState({
+    board: initialBoard,
+    status: Status.Stoped,
+  });
 
-  const { status } = state;
+  const { board, status } = state;
 
-  const cellA1 = { symbol: "A", status: Cell.Status.Open };
-  const cellA2 = { symbol: "A", status: Cell.Status.Done };
-  const cellB1 = { symbol: "B", status: Cell.Status.Closed };
-  const cellB2 = { symbol: "B", status: Cell.Status.Closed };
-  const cellC1 = { symbol: "C", status: Cell.Status.Closed };
-  const cellC2 = { symbol: "C", status: Cell.Status.Failed };
-
-  const board = [cellA1, cellA2, cellB1, cellB2, cellC1, cellC2];
-
-  const handleStartingClick = (e) => {
+  const handleStartingClick = () => {
     if (status != Status.Running) {
       setState(startGame);
     }
   };
 
+  const handleRunnigClick = (i) => {
+    if (status == Status.Running) {
+      setState(openCell(i));
+    }
+  };
+
   return (
     <div onClick={handleStartingClick}>
-      <ScreenBoxView status={status} board={board} />
+      <ScreenBoxView
+        status={status}
+        board={board}
+        onClickAt={handleRunnigClick}
+      />
     </div>
   );
 };
 
-const ScreenBoxView = ({ status, board }) => {
+const ScreenBoxView = ({ status, board, onClickAt }) => {
   switch (status) {
     case Status.Running:
-      return <Board.BoardView board={board} onClickAt={() => null} />;
+      return <Board.BoardView board={board} onClickAt={onClickAt} />;
 
     case Status.Stoped:
       return (
@@ -89,3 +112,5 @@ const ScreenBoxView = ({ status, board }) => {
       );
   }
 };
+
+export default Layout;

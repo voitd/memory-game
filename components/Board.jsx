@@ -3,6 +3,9 @@ import * as R from "rambda";
 import * as Cell from "./Cell";
 
 // Logic
+export const setStatusAt = R.curry((i, status, board) =>
+  R.set(R.lensPath(`${i}.status`), status, board)
+);
 
 // View
 export const BoardView = ({ board, onClickAt }) => {
