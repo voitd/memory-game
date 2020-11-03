@@ -24,15 +24,16 @@ export const View = ({ cell, onClick }) => {
   );
 };
 
-export const classByStatus = (status) => {
-  switch (status) {
-    case Status.Open:
-      return "failed";
-    case Status.Closed:
-      return "closed";
-    case Status.Done:
-      return "done";
-    case Status.Failed:
-      return "failed";
-  }
-};
+export const classByStatus = (status) => status.toLowerCase();
+
+// switch (status) {
+//   case Status.Open:
+//     return "failed";
+//   case Status.Closed:
+//     return "closed";
+//   case Status.Done:
+//     return "done";
+//   case Status.Failed:
+//     return "failed";
+// }
+// };
