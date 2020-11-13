@@ -3,10 +3,11 @@ body {
 }
 
 #root {
-  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin-top: -25px;
+  min-height: 100vh;
 }
 
 .cell {
@@ -45,10 +46,10 @@ body {
 
 .screen {
   display: flex;
-  width: 640px;
-  height: 480px;
   align-items: center;
   justify-content: center;
+  width: 640px;
+  height: 480px;
   cursor: pointer;
 }
 
@@ -66,4 +67,15 @@ body {
 
 .screen h1 {
   font-size: 3rem;
+}
+
+.status-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.timer {
+  margin-top: 1rem;
 }

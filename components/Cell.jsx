@@ -12,6 +12,7 @@ export const isOpen = (cell) => cell.status == Status.Open;
 export const isClosed = (cell) => cell.status == Status.Closed;
 export const isDone = (cell) => cell.status == Status.Done;
 export const isFailed = (cell) => cell.status == Status.Failed;
+export const isBlocked = (cell) => isOpen(cell) || isFailed(cell);
 
 //View
 
@@ -25,15 +26,3 @@ export const View = ({ cell, onClick }) => {
 };
 
 export const classByStatus = (status) => status.toLowerCase();
-
-// switch (status) {
-//   case Status.Open:
-//     return "failed";
-//   case Status.Closed:
-//     return "closed";
-//   case Status.Done:
-//     return "done";
-//   case Status.Failed:
-//     return "failed";
-// }
-// };
