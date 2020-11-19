@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 // Logic
 export const Status = {
-  Open: "Open",
-  Closed: "Closed",
-  Done: "Done",
-  Failed: "Failed",
+  Open: 'Open',
+  Closed: 'Closed',
+  Done: 'Done',
+  Failed: 'Failed',
 };
 
 export const isOpen = (cell) => cell.status == Status.Open;
@@ -20,7 +20,7 @@ export const View = ({ cell, onClick }) => {
   const { symbol, status } = cell;
   return (
     <div className={`cell ${classByStatus(status)}`} onClick={onClick}>
-      {status === Status.Closed ? "" : symbol}
+      {status === Status.Closed ? '' : symbol}
     </div>
   );
 };
